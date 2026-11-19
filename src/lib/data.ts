@@ -27,7 +27,6 @@ export const stats = [
   { value: "4.0", label: "Unweighted GPA" },
   { value: "ASB VP", label: "Malibu High" },
   { value: "2", label: "Internships" },
-  { value: "70+", label: "App ideas tested" },
 ];
 
 // Round icon buttons in the hero, next to the email button.
@@ -83,6 +82,7 @@ export const projects: Project[] = [
     stack: "React · Supabase · Stripe",
     icon: "layers",
     photo: "stackd",
+    photoAlt: "Stackd's landing page: learn credit in 5 minutes a day, next to a simulated credit score card",
   },
   {
     tag: "Ended · Automation",
@@ -91,6 +91,7 @@ export const projects: Project[] = [
     stack: "Python · Telegram · cron",
     icon: "bot",
     photo: "butterbot",
+    photoAlt: "A ButterBot daily brief in Telegram: portfolio holds, this week's earnings, and a play of the day",
   },
   {
     tag: "You're looking at it",
@@ -107,6 +108,7 @@ export const projects: Project[] = [
     text: "Order handling and job tracking for a UCSB neuroscience lab. As an intern I helped build the front end, job tracking (like organoid feeding), and antibody management and tracking. Its owner is now turning it into a startup.",
     icon: "flask",
     photo: "kosik",
+    photoAlt: "The lab app's antibody inventory: vials left, low-stock flags, and where each antibody is stored",
   },
   {
     tag: "Ended · E-commerce",
@@ -115,12 +117,6 @@ export const projects: Project[] = [
     stack: "Shopify",
     icon: "droplet",
     photo: "nipei",
-  },
-  {
-    tag: "Exploration",
-    title: "70+ app ideas",
-    text: "Ideas I tested with market research and quick prototypes, stress-testing business models like dropshipping and AI consumer apps.",
-    icon: "lightbulb",
   },
 ];
 
@@ -219,7 +215,15 @@ export const interests: Interest[] = [
     photoAlt: "Lucas at Topanga Point overlooking the Santa Monica Mountains",
     photoPosition: "38% 75%",
   },
-  { icon: "dumbbell", title: "Gym", text: "I lift on a weekly split.", benchPress: 185, photo: "gym" },
+  {
+    icon: "dumbbell",
+    title: "Gym",
+    text: "I lift on a weekly split.",
+    benchPress: 185,
+    photo: "gym",
+    photoAlt: "Lucas taking a mirror selfie in the gym locker room",
+    photoPosition: "50% 20%", // head to knees in the tall card
+  },
   {
     icon: "car",
     title: "Cars",
@@ -228,7 +232,14 @@ export const interests: Interest[] = [
     photoAlt: "Lucas's dark grey Audi RS3 at night",
     photoPosition: "10% 50%", // keeps the grille, headlight and front wheel in the tall card
   },
-  { icon: "plane", title: "Travel", text: "I love to travel. The photo up top is from Paris.", photo: "travel" },
+  {
+    icon: "plane",
+    title: "Travel",
+    text: "I love to travel. The photo up top is from Paris.",
+    photo: "travel",
+    photoAlt: "The candlelit altar and sculptures inside a church in Paris, shot on film",
+    photoPosition: "50% 75%", // keeps the lit altar, trims the dark dome
+  },
   {
     icon: "flame",
     title: "Burning Man",

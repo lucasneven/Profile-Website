@@ -57,8 +57,12 @@ export function HeroStats({ stats, className }: { stats: Stat[]; className?: str
             key={stat.label}
             className="flex flex-col-reverse gap-2 transition duration-300 group-hover/stats:opacity-60 hover:opacity-100! motion-safe:group-hover/stats:blur-[2px] motion-safe:hover:blur-none!"
           >
-            <dt className="text-xs tracking-[0.14em] text-muted-foreground uppercase">{stat.label}</dt>
-            <dd className="text-4xl leading-none font-bold md:text-5xl">
+            {/* On phones the text scales with the screen width, so all three stats fit in one
+                row down to 320px; long labels wrap onto a second line */}
+            <dt className="text-[clamp(0.625rem,3.2vw,0.75rem)] leading-4 tracking-[0.1em] text-muted-foreground uppercase sm:text-xs sm:tracking-[0.14em]">
+              {stat.label}
+            </dt>
+            <dd className="text-[clamp(1.25rem,7vw,1.875rem)] leading-none font-bold whitespace-nowrap sm:text-4xl md:text-5xl">
               {number ? (
                 <>
                   {/* Screen readers get the real value, not the moving digits. So does reduced
