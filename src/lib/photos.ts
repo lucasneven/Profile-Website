@@ -2,8 +2,8 @@
 // its slot and it shows up on its own; there's no code to change. data.ts says which card
 // uses which slot (the `photo` field), e.g. photo: "rs3" -> src/assets/photos/rs3.jpg.
 //
-//   Projects:   stackd, butterbot, nipei, kosik, this-website
-//   Interests:  snowboarding, climbing, hiking, gym, rs3, travel, burning-man
+//   Projects:   stackd, butterbot, spirit-of-the-forest, kosik, this-website
+//   Interests:  snowboarding, climbing, hiking, gym, rs3, travel, burning-man, investing
 //   Leadership: robotics, startup-team, asb, journalism
 //
 // Photos: .jpg, .jpeg, .png, .webp or .avif, lowercase extension (convert iPhone .heic
