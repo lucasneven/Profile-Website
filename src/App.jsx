@@ -1,3 +1,5 @@
+import useTheme from "./useTheme.js";
+import HeroBackground from "./components/HeroBackground.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import Section from "./components/Section.jsx";
@@ -12,9 +14,12 @@ import {
 } from "./data.js";
 
 export default function App() {
+  const [theme, toggleTheme] = useTheme();
+
   return (
     <>
-      <Nav />
+      <HeroBackground theme={theme} />
+      <Nav theme={theme} onToggleTheme={toggleTheme} />
 
       <main id="top">
         <Hero />

@@ -155,6 +155,19 @@ main {
 /* =========================================================
    HERO
    ========================================================= */
+/* Dot Field background (HeroBackground.jsx): sits behind the top of the
+   page, fades out toward the bottom and lets clicks pass through */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 720px;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

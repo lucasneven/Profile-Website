@@ -27,6 +27,8 @@ npm run preview # check the built version locally
 | Text: experience, projects, skills, interests | `src/data.js` |
 | Page structure and section order | `src/App.jsx` |
 | Nav, hero, section wrapper, icons | `src/components/` |
+| Dot background behind the hero (colors, strength) | `src/components/HeroBackground.jsx` |
 | Colors, fonts, layout | `src/style.css` (colors are at the top) |
 | Profile photo | `src/assets/profile.jpg` |
 | Favicon | `public/favicon.svg` |
+| Animated components (React Bits) | `src/components/reactbits/` (see `REACT_BITS.md`) |
