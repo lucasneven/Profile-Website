@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "ritwickdey.LiveServer",
     "esbenp.prettier-vscode",
     "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
@@ -8,5 +7,6 @@
     "ecmel.vscode-html-css",
     "kisstkondoros.vscode-gutter-preview",
     "mhutchie.git-graph"
-  ]
+  ],
+  "unwantedRecommendations": ["ritwickdey.LiveServer"]
 }

@@ -101,7 +101,7 @@ export default function App() {
           </div>
         </Section>
 
-        <Section id="next" title="What's next" className="contact">
+        <Section id="next" title="What's next">
           <p className="lead">
             Summer 2027: applying to Summer Discovery at UC Berkeley (Engineering &amp; Robotics
             Academy or Entrepreneurship: New Venture Creation). Then CS and entrepreneurship in
