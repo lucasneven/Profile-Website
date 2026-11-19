@@ -226,6 +226,7 @@ export const interests: Interest[] = [
     text: "I drive an Audi RS3 and dream of a Porsche Cayman. Favorite road: Angeles Crest, with Mulholland, Latigo and the Malibu canyons close behind.",
     photo: "rs3",
     photoAlt: "Lucas's dark grey Audi RS3 at night",
+    photoPosition: "10% 50%", // keeps the grille, headlight and front wheel in the tall card
   },
   { icon: "plane", title: "Travel", text: "I love to travel. The photo up top is from Paris.", photo: "travel" },
   {
