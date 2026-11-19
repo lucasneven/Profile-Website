@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* The site is always dark. <html> always has class="dark" (layout.tsx), so the dark:
+   classes inside library components always apply. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* intro: classes apply on the first visit of a session, when the intro curtain plays (IntroCurtain.tsx) */
+@custom-variant intro (&:where(.intro, .intro *));
+
+/* =========================================================
+   COLORS — change these to restyle the whole site.
+   Use them in classes as bg-background, text-muted-foreground,
+   border-border, text-accent, bg-surface, etc.
+   ========================================================= */
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted-foreground: #a1a1aa;
+  --surface: #131315;
+  --border: #27272a;
+  --accent: #7aa2ff;
+  --accent-foreground: #0a0a0a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  /* JetBrains Mono everywhere (loaded in layout.tsx). font-sans points at it too,
+     so library components that ask for font-sans stay monospace. */
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@theme {
+  /* Monospace text is wide, so body sizes get a bit more line spacing to stay readable */
+  --text-sm--line-height: 1.6;
+  --text-base--line-height: 1.7;
+  --text-lg--line-height: 1.65;
+  --text-xl--line-height: 1.55;
+
+  /* Hero entrance: fade up once on load (switched off for reduced motion where it's used) */
+  --animate-rise: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Dashed border around the hero photo: the dashes travel once around the frame every
+     18s while their lengths slowly change. Each pattern adds up to 250, so with
+     pathLength="1000" it repeats exactly 4 times and has no visible seam. */
+  --animate-frame-dash: frame-dash 18s linear infinite;
+  @keyframes frame-dash {
+    0% {
+      stroke-dasharray: 20 150 40 40;
+      stroke-dashoffset: 0;
+    }
+    33% {
+      stroke-dasharray: 16 54 96 84;
+    }
+    66% {
+      stroke-dasharray: 6 182 31 31;
+    }
+    100% {
+      stroke-dasharray: 20 150 40 40;
+      stroke-dashoffset: -1000;
+    }
+  }
+
+  /* Hero portrait entrance: the dashed frame fades in first, then the photo (delays in Hero.tsx) */
+  --animate-frame-in: frame-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  @keyframes frame-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  --animate-photo-in: photo-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  @keyframes photo-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+
+  /* Light beams behind the hero (spotlight-new.tsx): fade in, then sway sideways and back.
+     --beam-x is how far they sway. */
+  --animate-fade-in: fade-in 1.5s ease-out both;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  --animate-beam-drift: beam-drift 7s ease-in-out infinite;
+  @keyframes beam-drift {
+    50% {
+      transform: translateX(var(--beam-x, 100px));
+    }
+  }
+
+  /* The light that circles the navbar's "Say hi" border */
+  --animate-orbit: orbit 4s linear infinite;
+  @keyframes orbit {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* keeps section titles clear of the floating navbar */
+    color-scheme: dark;
+    /* thin blue scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--accent) 50%, transparent) transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+
+/* =========================================================
+   INTRO CURTAIN (IntroCurtain.tsx). On the first visit of a session, six dim-blue
+   columns cover the page, then drop away right to left while the hero fades in
+   (its intro: delays are in Hero.tsx). Only transform moves, so it stays smooth
+   even while the page is still loading. Never shown with reduced motion.
+   ========================================================= */
+.intro-curtain {
+  display: none;
+}
+.intro .intro-curtain {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 100vh;
+  height: 100lvh; /* the tallest the screen gets, so phone toolbars never uncover a strip */
+  z-index: 100;
+  display: flex;
+  pointer-events: none;
+  animation: curtain-done 0s 0.6s forwards; /* hide it once the last column is gone */
+}
+.intro-curtain > span {
+  flex: 1;
+  background: color-mix(in oklab, var(--accent) 15%, var(--background));
+  animation: curtain-drop 0.35s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+.intro-curtain > span:not(:last-child) {
+  margin-right: -1px; /* overlap a pixel so no seams show between columns */
+}
+/* Right to left: each column leaves 50ms after the one to its right */
+.intro-curtain > span:nth-child(5) { animation-delay: 50ms; }
+.intro-curtain > span:nth-child(4) { animation-delay: 100ms; }
+.intro-curtain > span:nth-child(3) { animation-delay: 150ms; }
+.intro-curtain > span:nth-child(2) { animation-delay: 200ms; }
+.intro-curtain > span:nth-child(1) { animation-delay: 250ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro .intro-curtain {
+    display: none;
+  }
+}
+
+@keyframes curtain-drop {
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes curtain-done {
+  to {
+    visibility: hidden;
+  }
+}

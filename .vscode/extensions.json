@@ -1,10 +1,11 @@
 {
   "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
     "christian-kohler.path-intellisense",
-    "ecmel.vscode-html-css",
     "kisstkondoros.vscode-gutter-preview",
     "mhutchie.git-graph"
   ],
