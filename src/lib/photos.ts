@@ -2,8 +2,8 @@
 // its slot and it shows up on its own; there's no code to change. data.ts says which card
 // uses which slot (the `photo` field), e.g. photo: "rs3" -> src/assets/photos/rs3.jpg.
 //
-//   Projects:   stackd, butterbot, nipei, kosik, this-website
-//   Interests:  snowboarding, climbing, hiking, gym, rs3, travel, burning-man
+//   Projects:   stackd, butterbot, spirit-of-the-forest, kosik, this-website
+//   Interests:  snowboarding, climbing, hiking, gym, rs3, travel, burning-man, investing
 //   Leadership: robotics, startup-team, asb, journalism
 //
 // Photos: .jpg, .jpeg, .png, .webp or .avif, lowercase extension (convert iPhone .heic
@@ -16,7 +16,9 @@ export type Media =
   | { kind: "image"; src: StaticImageData; alt: string; position?: string }
   | { kind: "video"; src: string; poster?: StaticImageData; alt: string; position?: string };
 
-const images = import.meta.glob<StaticImageData>(
+// Whole modules, not { import: "default" }: production builds rename a module's exports
+// unless its whole module object is used, and then "default" would come back undefined.
+const images = import.meta.glob<{ default: StaticImageData }>(
   [
     "../assets/photos/*.jpg",
     "../assets/photos/*.jpeg",
@@ -24,20 +26,20 @@ const images = import.meta.glob<StaticImageData>(
     "../assets/photos/*.webp",
     "../assets/photos/*.avif",
   ],
-  { eager: true, import: "default" },
+  { eager: true },
 );
 
 // Imported as a URL (the rule for these is in next.config.ts)
-const videos = import.meta.glob<string>(
+const videos = import.meta.glob<{ default: string }>(
   ["../assets/photos/*.mp4", "../assets/photos/*.webm", "../assets/photos/*.mov"],
-  { eager: true, import: "default" },
+  { eager: true },
 );
 
 /** "../assets/photos/burning-man.jpg" -> "burning-man" */
 const slotName = (path: string) => (path.split("/").pop() ?? "").replace(/\.[^.]+$/, "");
 
-const imageBySlot = new Map(Object.entries(images).map(([path, image]) => [slotName(path), image]));
-const videoBySlot = new Map(Object.entries(videos).map(([path, url]) => [slotName(path), url]));
+const imageBySlot = new Map(Object.entries(images).map(([path, file]) => [slotName(path), file.default]));
+const videoBySlot = new Map(Object.entries(videos).map(([path, file]) => [slotName(path), file.default]));
 
 /**
  * The photo or video for a slot, or undefined while its file hasn't been added yet.

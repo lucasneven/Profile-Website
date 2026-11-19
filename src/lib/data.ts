@@ -10,7 +10,7 @@ export const profile = {
   school: "Junior at Malibu High, CS at Santa Monica College.",
   email: "lucashneven@gmail.com",
   about:
-    "I'm in the class of 2028 and like building real software, then finding out whether people actually need it. Long term, I want to build and ship real products and companies. Away from the keyboard, I'm driving canyon roads in my RS3, snowboarding at Mammoth, climbing or out on a hike.",
+    "Hey, I'm Lucas, a junior at Malibu High. I like building things, like robots and software. When I'm not doing schoolwork or building, I'm bouldering, lifting or driving my RS3.",
 };
 
 export const navLinks = [
@@ -27,7 +27,6 @@ export const stats = [
   { value: "4.0", label: "Unweighted GPA" },
   { value: "ASB VP", label: "Malibu High" },
   { value: "2", label: "Internships" },
-  { value: "70+", label: "App ideas tested" },
 ];
 
 // Round icon buttons in the hero, next to the email button.
@@ -83,6 +82,7 @@ export const projects: Project[] = [
     stack: "React · Supabase · Stripe",
     icon: "layers",
     photo: "stackd",
+    photoAlt: "Stackd's landing page: learn credit in 5 minutes a day, next to a simulated credit score card",
   },
   {
     tag: "Ended · Automation",
@@ -91,6 +91,7 @@ export const projects: Project[] = [
     stack: "Python · Telegram · cron",
     icon: "bot",
     photo: "butterbot",
+    photoAlt: "A ButterBot daily brief in Telegram: portfolio holds, this week's earnings, and a play of the day",
   },
   {
     tag: "You're looking at it",
@@ -107,20 +108,16 @@ export const projects: Project[] = [
     text: "Order handling and job tracking for a UCSB neuroscience lab. As an intern I helped build the front end, job tracking (like organoid feeding), and antibody management and tracking. Its owner is now turning it into a startup.",
     icon: "flask",
     photo: "kosik",
+    photoAlt: "The lab app's antibody inventory: vials left, low-stock flags, and where each antibody is stored",
   },
   {
     tag: "Ended · E-commerce",
-    title: "Nipei Oil",
+    title: "Spirit of the Forest",
     text: "A wellness and essential oil brand, sourced in partnership with an Amazon community. I built the Shopify store, but it never made a sale before it ended.",
     stack: "Shopify",
     icon: "droplet",
-    photo: "nipei",
-  },
-  {
-    tag: "Exploration",
-    title: "70+ app ideas",
-    text: "Ideas I tested with market research and quick prototypes, stress-testing business models like dropshipping and AI consumer apps.",
-    icon: "lightbulb",
+    photo: "spirit-of-the-forest",
+    photoAlt: "The Spirit of the Forest logo: a leaf inside an oil drop, with the tagline Sacred Botanical Oils",
   },
 ];
 
@@ -177,14 +174,14 @@ export const skillGroups = [
   { title: "Languages", items: ["Python", "JavaScript", "C"] },
   { title: "Backend & services", items: ["Supabase", "Stripe", "Vercel", "AWS (S3, Glacier)", "Windows Server"] },
   { title: "AI dev tools", items: ["Claude Code", "Lovable", "Custom Claude Code skills & agents"] },
-  { title: "Other", items: ["git", "Shopify", "cron automation"] },
+  { title: "Other", items: ["git", "Shopify"] },
 ];
 
 export const coursework = [
   "Santa Monica College (college credit): CS87A Python Programming, CS79A Cloud Computing",
   "Planned at SMC: CS 52, CS 20A, Multivariable Calc, Linear Algebra, Micro & Macro Econ",
   "Malibu High, junior year: AP Calc BC, AP Physics 1, AP U.S. History, AP English Language, Journalism, ASB",
-  "Sophomore year: AP World History, Honors Chemistry, Honors Precalc/Calc, Honors English, Engineering",
+  "Sophomore year: AP World History, Honors Chemistry, Honors Precalc/Calc, Honors English, Engineering, Spanish 3",
 ];
 
 // The photo carousel. It slides along on its own and holds still while you hover or
@@ -205,7 +202,7 @@ export const interests: Interest[] = [
   {
     icon: "mountain",
     title: "Rock climbing",
-    text: "I climb every week and boulder around V3–V4.",
+    text: "I climb every week and boulder around V3–V5.",
     photo: "climbing",
     photoAlt: "Lucas bouldering at a climbing gym",
     photoPosition: "50% 48%",
@@ -219,15 +216,31 @@ export const interests: Interest[] = [
     photoAlt: "Lucas at Topanga Point overlooking the Santa Monica Mountains",
     photoPosition: "38% 75%",
   },
-  { icon: "dumbbell", title: "Gym", text: "I lift on a weekly split.", benchPress: 185, photo: "gym" },
+  {
+    icon: "dumbbell",
+    title: "Gym",
+    text: "I lift on a weekly split.",
+    benchPress: 185,
+    photo: "gym",
+    photoAlt: "Lucas taking a mirror selfie in the gym locker room",
+    photoPosition: "50% 20%", // head to knees in the tall card
+  },
   {
     icon: "car",
     title: "Cars",
-    text: "I drive an Audi RS3 and dream of a Porsche Cayman. Favorite road: Angeles Crest, with Mulholland, Latigo and the Malibu canyons close behind.",
+    text: "I drive an Audi RS3. My favorite road is Angeles Crest Highway.",
     photo: "rs3",
     photoAlt: "Lucas's dark grey Audi RS3 at night",
+    photoPosition: "10% 50%", // keeps the grille, headlight and front wheel in the tall card
   },
-  { icon: "plane", title: "Travel", text: "I love to travel. The photo up top is from Paris.", photo: "travel" },
+  {
+    icon: "plane",
+    title: "Travel",
+    text: "I love to travel. The photo up top is from Paris.",
+    photo: "travel",
+    photoAlt: "The candlelit altar and sculptures inside a church in Paris, shot on film",
+    photoPosition: "50% 75%", // keeps the lit altar, trims the dark dome
+  },
   {
     icon: "flame",
     title: "Burning Man",
@@ -241,6 +254,8 @@ export const interests: Interest[] = [
     icon: "trendingUp",
     title: "Investing",
     text: "I manage my own portfolio: long-term holds in tech and AI semiconductor stocks.",
+    photo: "investing", // share counts are blurred in the screenshot on purpose
+    photoAlt: "Some of Lucas's positions: AMD, DGXX, LUNR, MSFT, MU, NOK and NVDA with the day's moves",
   },
 ];
 

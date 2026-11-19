@@ -39,7 +39,7 @@ import { BentoGrid } from "@/components/ui/bento-grid";
 import BlurText from "@/components/reactbits/BlurText";
 ```
 
-`@/` means `src/`. Props are listed on each component's page. Real examples live in `src/components/site/`: `Sections.tsx` uses Timeline, Bento Grid, Card Hover Effect, Glowing Effect and Background Beams, and `Hero.tsx` uses Hero Highlight (the hover on the name), Interactive Hover Button (the "See what I've built" button), Spotlight New (the light beams), CountUp (`HeroStats.tsx`) and Dot Field (`HeroDots.tsx`).
+`@/` means `src/`. Props are listed on each component's page. Real examples live in `src/components/site/`, one file per section: `Experience.tsx` uses Timeline, `Projects.tsx` uses Folder Stack (`folder-stack.tsx`, reworked from Animated Testimonials), `Leadership.tsx` uses Expandable Card, `Skills.tsx` uses Infinite Moving Cards, `Interests.tsx` uses Apple Cards Carousel, `NextUp.tsx` uses Background Beams, and `Hero.tsx` uses Hero Highlight (the hover on the name), Interactive Hover Button (the "See what I've built" button), Spotlight New (the light beams), CountUp (`HeroStats.tsx`) and Dot Field (`HeroDots.tsx`).
 
 ## If something's off
 

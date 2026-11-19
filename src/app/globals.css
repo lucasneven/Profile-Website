@@ -4,7 +4,8 @@
    classes inside library components always apply. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* intro: classes apply on the first visit of a session, when the intro curtain plays (IntroCurtain.tsx) */
+/* intro: classes apply while the page opens with the intro curtain: every page load, unless
+   the visitor has reduced motion on (IntroCurtain.tsx) */
 @custom-variant intro (&:where(.intro, .intro *));
 
 /* =========================================================
@@ -141,10 +142,11 @@
 }
 
 /* =========================================================
-   INTRO CURTAIN (IntroCurtain.tsx). On the first visit of a session, six dim-blue
-   columns cover the page, then drop away right to left while the hero fades in
-   (its intro: delays are in Hero.tsx). Only transform moves, so it stays smooth
-   even while the page is still loading. Never shown with reduced motion.
+   INTRO CURTAIN (IntroCurtain.tsx). On every page load, six deep-blue columns cover
+   the page, then drop away right to left, each 80ms after the one to its right, and
+   are all gone by 0.9s. The hero fades in right behind them (its intro: delays are in
+   Hero.tsx). Only transform moves, so it stays smooth even while the page is still
+   loading. Never shown with reduced motion.
    ========================================================= */
 .intro-curtain {
   display: none;
@@ -156,23 +158,29 @@
   height: 100lvh; /* the tallest the screen gets, so phone toolbars never uncover a strip */
   z-index: 100;
   display: flex;
-  pointer-events: none;
-  animation: curtain-done 0s 0.6s forwards; /* hide it once the last column is gone */
+  overflow: hidden; /* columns leave through the bottom without making the page longer */
+  pointer-events: none; /* clicks and scrolling go straight through, even mid-animation */
+  animation: curtain-done 0s 0.9s forwards; /* hide it once the last column has left */
 }
 .intro-curtain > span {
   flex: 1;
-  background: color-mix(in oklab, var(--accent) 15%, var(--background));
-  animation: curtain-drop 0.35s cubic-bezier(0.65, 0, 0.35, 1) both;
+  /* A deep, saturated take on the accent blue (#7aa2ff), bold enough to read on the dark page */
+  background: #2550cc;
+  /* A thin light top edge and a soft shadow on the left, so each column reads as its own panel */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    -6px 0 16px rgb(0 0 0 / 0.3);
+  animation: curtain-drop 0.5s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 .intro-curtain > span:not(:last-child) {
   margin-right: -1px; /* overlap a pixel so no seams show between columns */
 }
-/* Right to left: each column leaves 50ms after the one to its right */
-.intro-curtain > span:nth-child(5) { animation-delay: 50ms; }
-.intro-curtain > span:nth-child(4) { animation-delay: 100ms; }
-.intro-curtain > span:nth-child(3) { animation-delay: 150ms; }
-.intro-curtain > span:nth-child(2) { animation-delay: 200ms; }
-.intro-curtain > span:nth-child(1) { animation-delay: 250ms; }
+/* Right to left: each column leaves 80ms after the one to its right */
+.intro-curtain > span:nth-child(5) { animation-delay: 80ms; }
+.intro-curtain > span:nth-child(4) { animation-delay: 160ms; }
+.intro-curtain > span:nth-child(3) { animation-delay: 240ms; }
+.intro-curtain > span:nth-child(2) { animation-delay: 320ms; }
+.intro-curtain > span:nth-child(1) { animation-delay: 400ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .intro .intro-curtain {

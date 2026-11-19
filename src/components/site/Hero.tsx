@@ -22,9 +22,10 @@ const portraitFocus = "75% 85%";
 
 const socialIcons = { github: IconBrandGithub, instagram: IconBrandInstagram, x: IconBrandX };
 
-// Each block fades up once on load, one after another. The first visit of a session
-// opens with the intro curtain (IntroCurtain.tsx), so there each block waits for its
-// intro: delay instead: text from 0.4s, photo frame 0.8s, stats 0.9s, photo 1.1s.
+// Each block fades up once on load, one after another. Every page load opens with the
+// intro curtain (IntroCurtain.tsx), which sweeps away right to left, so then each block
+// waits for its intro: delay instead and appears just as the columns over it leave:
+// photo frame 0.4s, photo 0.5s, text from 0.55s, stats 0.75s, all settled by about 1.6s.
 // Off with reduced motion.
 const rise = "animate-rise motion-reduce:animate-none";
 
@@ -45,7 +46,7 @@ export function Hero() {
     <section id="top" className="relative isolate overflow-hidden">
       {/* Faint light beams swaying in from the top corners (Aceternity Spotlight New) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-30 md:opacity-80">
-        <Spotlight duration={10} className="intro:[animation-delay:600ms]" />
+        <Spotlight duration={10} className="intro:[animation-delay:100ms]" />
       </div>
       <HeroDots />
 
@@ -55,7 +56,7 @@ export function Hero() {
             <p
               className={cn(
                 rise,
-                "flex items-center gap-3 text-base text-muted-foreground md:text-lg intro:[animation-delay:400ms]",
+                "flex items-center gap-3 text-base text-muted-foreground md:text-lg intro:[animation-delay:550ms]",
               )}
             >
               <span aria-hidden="true" className="size-2 shrink-0 bg-accent" />
@@ -67,7 +68,7 @@ export function Hero() {
               className={cn(
                 rise,
                 // 1.1 line height keeps the comma in "Hi," clear of the highlight block below it
-                "mt-3 text-[clamp(3.5rem,13vw,6.5rem)] leading-[1.1] font-bold tracking-tight [animation-delay:60ms] intro:[animation-delay:500ms]",
+                "mt-3 text-[clamp(3.5rem,13vw,6.5rem)] leading-[1.1] font-bold tracking-tight [animation-delay:60ms] intro:[animation-delay:610ms]",
               )}
             >
               Hi, I&apos;m
@@ -82,7 +83,7 @@ export function Hero() {
             <p
               className={cn(
                 rise,
-                "mt-7 inline-flex max-w-full items-center gap-2 rounded-2xl border border-accent/25 bg-accent/[0.07] py-1.5 pr-3.5 pl-2.5 text-xs text-foreground/85 sm:rounded-full sm:text-sm [animation-delay:120ms] intro:[animation-delay:580ms]",
+                "mt-7 inline-flex max-w-full items-center gap-2 rounded-2xl border border-accent/25 bg-accent/[0.07] py-1.5 pr-3.5 pl-2.5 text-xs text-foreground/85 sm:rounded-full sm:text-sm [animation-delay:120ms] intro:[animation-delay:670ms]",
               )}
             >
               <GraduationCap aria-hidden="true" className="size-4 shrink-0 text-accent" />
@@ -93,7 +94,7 @@ export function Hero() {
             <p
               className={cn(
                 rise,
-                "mt-4 max-w-xl text-base text-muted-foreground [animation-delay:160ms] intro:[animation-delay:640ms]",
+                "mt-4 max-w-xl text-base text-muted-foreground [animation-delay:160ms] intro:[animation-delay:710ms]",
               )}
             >
               {profile.tagline}
@@ -107,7 +108,7 @@ export function Hero() {
             <div
               className={cn(
                 rise,
-                "mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:200ms] intro:[animation-delay:700ms]",
+                "mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:200ms] intro:[animation-delay:750ms]",
               )}
             >
               {/* Hover it: the dot fills the button (MagicUI Interactive Hover Button) */}
@@ -147,11 +148,13 @@ export function Hero() {
           </div>
         </div>
 
+        {/* Three stats in one row of equal thirds: centered on phones, left-aligned from
+            tablet width up (HeroStats.tsx shrinks the text a little on narrow phones so it fits) */}
         <HeroStats
           stats={stats}
           className={cn(
             rise,
-            "mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-7 md:grid-cols-4 [animation-delay:260ms] intro:[animation-delay:900ms]",
+            "mt-10 grid grid-cols-3 items-start gap-x-3 border-t border-border pt-7 text-center md:gap-x-6 md:text-left [animation-delay:260ms] intro:[animation-delay:750ms]",
           )}
         />
       </div>
@@ -171,7 +174,7 @@ function Portrait() {
     <div className="group relative w-full max-w-md lg:w-[20rem] lg:max-w-none xl:w-[26rem]">
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -top-3 -left-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] animate-frame-in overflow-visible text-accent/60 [filter:drop-shadow(0_0_3px_color-mix(in_oklab,var(--accent)_45%,transparent))] [animation-delay:100ms] motion-reduce:animate-none intro:[animation-delay:800ms]"
+        className="pointer-events-none absolute -top-3 -left-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] animate-frame-in overflow-visible text-accent/60 [filter:drop-shadow(0_0_3px_color-mix(in_oklab,var(--accent)_45%,transparent))] [animation-delay:100ms] motion-reduce:animate-none intro:[animation-delay:400ms]"
       >
         <rect
           width="100%"
@@ -186,7 +189,7 @@ function Portrait() {
           className="animate-frame-dash motion-reduce:animate-none"
         />
       </svg>
-      <div className="animate-photo-in overflow-hidden rounded-3xl [animation-delay:200ms] motion-reduce:animate-none intro:[animation-delay:1100ms]">
+      <div className="animate-photo-in overflow-hidden rounded-3xl [animation-delay:200ms] motion-reduce:animate-none intro:[animation-delay:500ms]">
         <Image
           src={portrait}
           alt={portraitAlt}
