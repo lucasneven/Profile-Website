@@ -1,0 +1,349 @@
+/* =========================================================
+   COLORS — change these to restyle the whole site at once
+   ========================================================= */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --text: #1c1b1a;
+  --muted: #6b6760;
+  --border: #e8e4dc;
+  --accent: #2f6fed;
+  --accent-soft: #e6eefe;
+  --on-accent: #ffffff;   /* text on top of accent-colored buttons */
+  color-scheme: light;
+}
+
+/* Dark gray theme — the DEFAULT look. It applies unless the page is
+   switched to light (data-theme="light"), so first-time visitors see it
+   even before script.js runs. Neutral grays, all text passes WCAG AA. */
+:root:not([data-theme="light"]) {
+  --bg: #222222;          /* page background */
+  --surface: #2e2e2e;     /* cards, chips, stat boxes (a step lighter) */
+  --text: #ececec;
+  --muted: #ababab;
+  --border: #444444;
+  --accent: #7aa2ff;
+  --accent-soft: #2a3348;
+  --on-accent: #141414;   /* dark text: white on light-blue fails contrast */
+  color-scheme: dark;
+}
+
+/* =========================================================
+   BASICS
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1, h2 { font-family: "Fraunces", Georgia, serif; line-height: 1.1; }
+h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+
+/* =========================================================
+   NAV BAR
+   ========================================================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav nav { display: flex; gap: 1.25rem; }
+
+.nav nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.nav nav a:hover { color: var(--accent); }
+
+#theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 2.25rem;
+  height: 2.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #9b5cf6);
+  margin-bottom: 1.5rem;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------- HERO PHOTO (profile portrait, replaces the .avatar initials) ---------- */
+/* A small circular accent above the name. The <div> is the circle (it clips);
+   the <img> inside is zoomed so the face, not the shirt/background, fills it.
+   The source is square, so object-position alone can't crop it; instead tune
+   --photo-zoom and the focus point (where in the source photo to center). */
+.hero-photo {
+  --photo-zoom: 1;        /* 1 = whole photo; higher = tighter on the face */
+  --photo-focus-x: 50%;   /* focus point, as % of the source image */
+  --photo-focus-y: 50%;
+  flex: none;
+  width: clamp(120px, 8vw + 50px, 152px);   /* ~152px desktop, 120px phones */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  /* thin gap in the page color, then an accent ring — follows light/dark theme */
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 0 0 5px var(--accent),
+    0 10px 24px -14px color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--accent-soft); /* placeholder tint while the image loads */
+  animation: hero-photo-in 0.7s ease both;
+}
+
+.hero-photo img {
+  display: block;
+  /* enlarge, then shift so the focus point lands in the circle's center
+     (% margins resolve against the square's width, so this works on both axes) */
+  width: calc(var(--photo-zoom) * 100%);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin-left: calc(50% - var(--photo-zoom) * var(--photo-focus-x));
+  margin-top: calc(50% - var(--photo-zoom) * var(--photo-focus-y));
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: var(--photo-focus-x) var(--photo-focus-y);
+}
+
+@keyframes hero-photo-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-photo { margin-bottom: 1rem; }
+}
+/* ---------- END HERO PHOTO ---------- */
+
+.eyebrow { color: var(--muted); font-weight: 500; }
+
+.hero h1 {
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  margin: 0.25rem 0 0.75rem;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.button {
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+.button:hover { transform: translateY(-2px); }
+
+/* =========================================================
+   SECTIONS & CARDS
+   ========================================================= */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.card .sub { color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+.card p { color: var(--muted); }
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.emoji { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+/* =========================================================
+   ACCOMPLISHMENTS TIMELINE
+   ========================================================= */
+.timeline { list-style: none; border-left: 2px solid var(--border); }
+
+.timeline li {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0 0 2rem 1.5rem;
+  position: relative;
+}
+
+/* the little dot on the line */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline .year { font-weight: 700; color: var(--accent); min-width: 3.5rem; }
+.timeline p { color: var(--muted); }
+
+/* =========================================================
+   LIKES (chips)
+   ========================================================= */
+.chips { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   EXTRA PIECES — hero stats, skills, coursework lists
+   ========================================================= */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.stats div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.7rem 1.1rem;
+  min-width: 110px;
+}
+.stats strong { display: block; font-size: 1.2rem; }
+.stats span { color: var(--muted); font-size: 0.85rem; }
+
+.lead { font-size: 1.1rem; margin-bottom: 1rem; }
+.lead:last-child { margin-bottom: 0; }
+
+.timeline .sub { color: var(--accent); font-weight: 500; margin-bottom: 0.25rem; }
+
+.stack {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text) !important;
+}
+
+.skill-group { margin-bottom: 1.5rem; }
+.skill-group h3 { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+
+.spaced { margin-top: 3.5rem; }
+
+.list { list-style: none; margin: 0.5rem 0; }
+.list li { padding: 0.2rem 0; color: var(--muted); }
+.list li::before { content: "→ "; color: var(--accent); }
+.small { font-size: 0.85rem; margin-top: 0.75rem; }
+
+.contact { text-align: center; }
+.contact p { color: var(--muted); }
+
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   SCROLL ANIMATION — sections fade in as you scroll
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* =========================================================
+   PHONES — hide nav links on small screens
+   ========================================================= */
+@media (max-width: 640px) {
+  .nav nav { display: none; }
+  .timeline li { flex-direction: column; gap: 0.25rem; }
+}
