@@ -16,7 +16,7 @@ import {
   type Transition,
 } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { cn, pressable } from "@/lib/utils";
 
 export type Folder = {
@@ -61,6 +61,15 @@ export function FolderStack({ items, className }: { items: Folder[]; className?:
   const tilts = useFinePointer() && !reduce;
   const rotateX = useSpring(0, { stiffness: 150, damping: 18 });
   const rotateY = useSpring(0, { stiffness: 150, damping: 18 });
+  const folders = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // If a folder had keyboard focus and got sent back, hand focus to the new front folder
+  useEffect(() => {
+    const focused = document.activeElement;
+    if (focused && folders.current.includes(focused as HTMLButtonElement) && focused !== folders.current[active]) {
+      folders.current[active]?.focus({ preventScroll: true });
+    }
+  }, [active]);
 
   const wrap = (i: number) => ((i % n) + n) % n;
   const show = (i: number) => setOrder((o) => (wrap(i) === o.active ? o : { active: wrap(i), previous: o.active }));
@@ -133,6 +142,9 @@ export function FolderStack({ items, className }: { items: Folder[]; className?:
                 className="absolute inset-0"
               >
                 <button
+                  ref={(el) => {
+                    folders.current[i] = el;
+                  }}
                   type="button"
                   onClick={() => (front ? step(1) : show(i))}
                   tabIndex={front ? 0 : -1}
@@ -200,7 +212,7 @@ export function FolderStack({ items, className }: { items: Folder[]; className?:
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                <Details folder={current} reveal={!reduce} />
+                <Details folder={current} live reveal={!reduce} />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -232,7 +244,7 @@ export function FolderStack({ items, className }: { items: Folder[]; className?:
           >
             <ArrowRight className="size-4" />
           </button>
-          <p className="ml-3 hidden text-xs text-muted-foreground sm:block">
+          <p className="ml-3 hidden text-xs text-muted-foreground sm:block md:hidden lg:block">
             <span className="pointer-coarse:hidden">Click</span>
             <span className="hidden pointer-coarse:inline">Tap</span> the folder for the next one
           </p>
@@ -242,8 +254,12 @@ export function FolderStack({ items, className }: { items: Folder[]; className?:
   );
 }
 
-/** Tag, title, text and chips. `reveal` fades the words in one after another. */
-function Details({ folder, reveal = false }: { folder: Folder; reveal?: boolean }) {
+/**
+ * Tag, title, text and chips. `live` is the visible copy; with `reveal` its words fade
+ * in one after another. (Its element types never depend on reduced motion, so the
+ * server and browser render the same markup.)
+ */
+function Details({ folder, live = false, reveal = false }: { folder: Folder; live?: boolean; reveal?: boolean }) {
   return (
     <>
       <p className="w-fit rounded-full border border-accent/30 bg-accent/[0.07] px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
@@ -253,10 +269,10 @@ function Details({ folder, reveal = false }: { folder: Folder; reveal?: boolean 
       {/* Words are separate boxes either way, so the invisible copies wrap exactly like this one */}
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
         {folder.text.split(" ").map((word, i) =>
-          reveal ? (
+          live ? (
             <motion.span
               key={i}
-              initial={{ opacity: 0, filter: "blur(6px)", y: 4 }}
+              initial={reveal ? { opacity: 0, filter: "blur(6px)", y: 4 } : false}
               animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
               transition={{ duration: 0.25, ease: "easeOut", delay: 0.012 * i }}
               className="inline-block"

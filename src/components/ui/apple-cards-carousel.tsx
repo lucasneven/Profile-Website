@@ -290,7 +290,7 @@ export function Card({
         <>
           {media}
           {/* Darkens the top (and a little of the bottom) so the text stays readable on any photo */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_0/0.8),rgb(0_0_0/0.35)_38%,transparent_60%,transparent_75%,rgb(0_0_0/0.6))]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_0/0.82),rgb(0_0_0/0.5)_34%,transparent_60%,transparent_75%,rgb(0_0_0/0.6))]" />
         </>
       ) : (
         <div aria-hidden="true" className="absolute inset-0">
