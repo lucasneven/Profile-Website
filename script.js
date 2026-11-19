@@ -4,7 +4,7 @@ const root = document.documentElement;
 
 function setTheme(theme) {
   root.setAttribute("data-theme", theme);
-  toggle.textContent = theme === "dark" ? "☀️" : "🌙";
+  toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
   try { localStorage.setItem("theme", theme); } catch (e) {}
 }
 

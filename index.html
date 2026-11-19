@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-layout="editorial">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucas Neven</title>
-  <meta name="description" content="Lucas Neven — student builder, founder, and CS student at Malibu High School and Santa Monica College." />
+  <meta name="description" content="Lucas Neven: I build apps, start things, and invest. Junior at Malibu High, CS at Santa Monica College." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet" />
+  <!-- Extra Fraunces styles (regular + italic) used by the Editorial layout -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -23,7 +25,7 @@
       <a href="#skills">Skills</a>
       <a href="#likes">Interests</a>
     </nav>
-    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    <button id="theme-toggle" aria-label="Toggle dark mode"><svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg><svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></button>
   </header>
 
   <main id="top">
@@ -43,32 +45,25 @@
       <p class="eyebrow">Hi, I'm</p>
       <h1>Lucas Neven</h1>
       <p class="tagline">
-        Junior at Malibu High · CS at Santa Monica College · I build software and start things
+        I build apps, start things, and invest. Junior at Malibu High, CS at Santa Monica College.
       </p>
+      <p class="contact-email">Say hi: <a href="mailto:lucashneven@gmail.com">lucashneven@gmail.com</a></p>
       <div class="stats">
         <div><strong>4.0</strong><span>GPA</span></div>
         <div><strong>ASB VP</strong><span>Malibu High</span></div>
         <div><strong>2</strong><span>internships</span></div>
         <div><strong>70+</strong><span>app ideas tested</span></div>
       </div>
-      <a href="#about" class="button">Get to know me ↓</a>
+      <a href="#about" class="button">Get to know me <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
     </section>
 
     <!-- ============ ABOUT ============ -->
     <section id="about" class="section reveal">
       <h2>About me</h2>
       <p class="lead">
-        I'm a junior at Malibu High School (class of 2028), and I'm also taking
-        college computer science courses at Santa Monica College. I like
-        building real software and figuring out whether people actually need it.
-        Outside of school I manage my own stock portfolio, lift, go bouldering,
-        and spend too much time thinking about cars and archive fashion.
-      </p>
-      <p class="lead">
-        I want to study computer science and entrepreneurship in college. I'm
-        aiming for Stanford, UC Berkeley, and UCLA, and I'm especially interested
-        in Berkeley's Management, Entrepreneurship &amp; Technology (M.E.T.)
-        program. Long term, I want to build and ship real products and companies.
+        I'm in the class of 2028 and like building real software, then finding
+        out whether people actually need it. Long term, I want to build and ship
+        real products and companies.
       </p>
     </section>
 
@@ -81,8 +76,8 @@
           <div>
             <h3>Intern, Wilkinson Global Asset Management</h3>
             <p class="sub">August 2026</p>
-            <p>Met with the Operations and Client Services teams to map how they
-            work, then built an internal workflow project based on what I learned.</p>
+            <p>Mapped how the Operations and Client Services teams work, then built
+            an internal workflow project based on it.</p>
           </div>
         </li>
         <li>
@@ -90,9 +85,9 @@
           <div>
             <h3>Research Intern, Kosik Lab, UC Santa Barbara</h3>
             <p class="sub">Professor Kenneth Kosik · brain organoid research</p>
-            <p>Built a workflow web app for the lab that handles orders and tracks
-            lab jobs like organoid feeding. The app is now being developed into a
-            startup for UCSB's New Venture Competition.</p>
+            <p>Built the lab's workflow web app for orders and jobs like organoid
+            feeding, now being developed into a startup for UCSB's New Venture
+            Competition.</p>
           </div>
         </li>
       </ul>
@@ -103,49 +98,48 @@
       <h2>Leadership &amp; activities</h2>
       <div class="grid">
         <article class="card">
-          <span class="emoji">🏛️</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg></span>
           <h3>ASB Vice President</h3>
           <p class="sub">Malibu High School</p>
-          <p>Vice president of student government.</p>
+          <p>Student government.</p>
         </article>
         <article class="card">
-          <span class="emoji">🚀</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></span>
           <h3>Founder &amp; President</h3>
           <p class="sub">Software Startup Team</p>
-          <p>I teach students git and AI-assisted development so they design, build,
-          and ship real software instead of just learning syntax. We run build
-          sprints with demo days and plan to compete in Next Big Thing LA.</p>
+          <p>I teach students git and AI-assisted development so they ship real
+          software. We run build sprints with demo days and plan to compete in
+          Next Big Thing LA.</p>
         </article>
         <article class="card">
-          <span class="emoji">🧗</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg></span>
           <h3>Co-founder</h3>
           <p class="sub">Body Improvement Club</p>
-          <p>A club for lifting and bouldering together.</p>
+          <p>Lifting and bouldering together.</p>
         </article>
         <article class="card">
-          <span class="emoji">🌊</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"/><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"/></svg></span>
           <h3>Commission Member</h3>
           <p class="sub">Harry Barovsky Memorial Youth Commission, City of Malibu</p>
-          <p>Youth representative on a City of Malibu commission.</p>
+          <p>Youth representative to the city.</p>
         </article>
         <article class="card">
-          <span class="emoji">📰</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg></span>
           <h3>Journalism</h3>
           <p class="sub">Malibu High School</p>
-          <p>Writing and reporting for the school journalism program.</p>
+          <p>I write and report for the school's journalism program.</p>
         </article>
         <article class="card">
-          <span class="emoji">🤖</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
           <h3>Robotics</h3>
           <p class="sub">Member · Malibu High School</p>
-          <p>Member of the school robotics club.</p>
+          <p>School club. I also did VEX robotics and built a marble sorter in RobotC.</p>
         </article>
         <article class="card">
-          <span class="emoji">🏈</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg></span>
           <h3>Former Varsity Athlete</h3>
           <p class="sub">Track · Football · Tennis</p>
-          <p>Competed on three varsity teams. I also did VEX robotics and built
-          a marble sorter in RobotC.</p>
+          <p>Competed on three varsity teams.</p>
         </article>
       </div>
     </section>
@@ -157,42 +151,38 @@
         <article class="card">
           <span class="tag">Active · Startup</span>
           <h3>Kosik Lab Workflow App</h3>
-          <p>Order handling and job tracking (like organoid feeding) for a UCSB
-          neuroscience lab. Being turned into a startup for UCSB's New Venture
-          Competition.</p>
+          <p>Order handling and job tracking for a UCSB neuroscience lab.</p>
         </article>
         <article class="card">
           <span class="tag">Shut down · Lesson learned</span>
           <h3>Stackd</h3>
-          <p>A financial literacy web app built with React, Supabase, and Stripe.
-          I shut it down after concluding people rarely pay to learn finance.
-          It taught me to validate demand before building.</p>
+          <p>A financial literacy web app I shut down after realizing people rarely
+          pay to learn finance. Lesson: validate demand before building.</p>
           <p class="stack">React · Supabase · Stripe</p>
         </article>
         <article class="card">
           <span class="tag">Running daily</span>
           <h3>ButterBot</h3>
-          <p>A Telegram bot that sends me automated daily stock briefs. It runs
-          on a schedule on a Mac mini.</p>
+          <p>A Telegram bot that sends me daily stock briefs from a Mac mini.</p>
           <p class="stack">Python · Telegram · cron</p>
         </article>
         <article class="card">
           <span class="tag">E-commerce</span>
           <h3>Nipei Oil</h3>
-          <p>A single-product Shopify brand selling oil sourced in partnership
-          with an Amazon community.</p>
+          <p>A single-product brand selling oil sourced in partnership with an
+          Amazon community.</p>
           <p class="stack">Shopify</p>
         </article>
         <article class="card">
           <span class="tag">Exploration</span>
           <h3>70+ app ideas</h3>
-          <p>Explored more than 70 app ideas and stress-tested business models
-          like dropshipping and AI consumer apps.</p>
+          <p>Explored ideas and stress-tested business models like dropshipping
+          and AI consumer apps.</p>
         </article>
         <article class="card">
           <span class="tag">You're looking at it</span>
           <h3>This website</h3>
-          <p>Built with HTML, CSS, and JavaScript using Claude Code.</p>
+          <p>Built with Claude Code.</p>
           <p class="stack">HTML · CSS · JS</p>
         </article>
       </div>
@@ -236,44 +226,14 @@
         </div>
       </div>
 
-      <h2 class="spaced">Coursework</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="tag">College credit</span>
-          <h3>Santa Monica College</h3>
-          <ul class="list">
-            <li>CS87A Python Programming</li>
-            <li>CS79A Cloud Computing</li>
-          </ul>
-          <p class="sub small">Planned</p>
-          <ul class="list">
-            <li>CS 52 · CS 20A</li>
-            <li>Multivariable Calculus · Linear Algebra</li>
-            <li>Micro &amp; Macro Economics</li>
-          </ul>
-        </article>
-        <article class="card">
-          <span class="tag">Junior year</span>
-          <h3>Malibu High School</h3>
-          <ul class="list">
-            <li>AP Calculus BC</li>
-            <li>AP Physics 1</li>
-            <li>AP U.S. History</li>
-            <li>AP English Language</li>
-            <li>Journalism · ASB</li>
-          </ul>
-        </article>
-        <article class="card">
-          <span class="tag">Sophomore year</span>
-          <h3>Malibu High School</h3>
-          <ul class="list">
-            <li>AP World History</li>
-            <li>Honors Chemistry</li>
-            <li>Honors Precalc/Calc</li>
-            <li>Honors English</li>
-            <li>Engineering</li>
-          </ul>
-        </article>
+      <div class="skill-group">
+        <h3>Coursework</h3>
+        <ul class="list">
+          <li>Santa Monica College (college credit): CS87A Python Programming, CS79A Cloud Computing</li>
+          <li>Planned at SMC: CS 52, CS 20A, Multivariable Calc, Linear Algebra, Micro &amp; Macro Econ</li>
+          <li>Malibu High, junior year: AP Calc BC, AP Physics 1, AP U.S. History, AP English Language, Journalism, ASB</li>
+          <li>Sophomore year: AP World History, Honors Chemistry, Honors Precalc/Calc, Honors English, Engineering</li>
+        </ul>
       </div>
     </section>
 
@@ -282,26 +242,26 @@
       <h2>What I'm into</h2>
       <div class="grid">
         <article class="card">
-          <span class="emoji">📈</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></span>
           <h3>Investing</h3>
           <p>I manage my own stock portfolio, focused on tech and AI semiconductors.</p>
         </article>
         <article class="card">
-          <span class="emoji">🏎️</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
           <h3>Cars</h3>
-          <p>I love driving, especially BMW and Porsche, and I want to tune
-          and work on cars myself.</p>
+          <p>I love driving, especially BMW and Porsche, and want to tune and
+          work on cars myself.</p>
         </article>
         <article class="card">
-          <span class="emoji">🧥</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg></span>
           <h3>Fashion</h3>
           <p>Archive and vintage designers like Raf Simons, Helmut Lang, and
           Comme des Garçons.</p>
         </article>
         <article class="card">
-          <span class="emoji">🏋️</span>
+          <span class="card-icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></svg></span>
           <h3>Fitness</h3>
-          <p>Lifting on a weekly split and climbing or bouldering every week.</p>
+          <p>I lift on a weekly split and climb or boulder every week.</p>
         </article>
       </div>
     </section>
@@ -312,7 +272,8 @@
       <p class="lead">
         Summer 2027: applying to Summer Discovery at UC Berkeley (Engineering
         &amp; Robotics Academy or Entrepreneurship: New Venture Creation).
-        After that, CS and entrepreneurship in college.
+        Then CS and entrepreneurship in college, aiming for Stanford, UC Berkeley
+        (especially its <abbr title="Management, Entrepreneurship &amp; Technology">M.E.T.</abbr> program), and UCLA.
       </p>
     </section>
 

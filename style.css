@@ -235,8 +235,6 @@ h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
   margin-bottom: 0.75rem;
 }
 
-.emoji { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-
 /* =========================================================
    ACCOMPLISHMENTS TIMELINE
    ========================================================= */
@@ -312,12 +310,10 @@ h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
 .skill-group { margin-bottom: 1.5rem; }
 .skill-group h3 { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
 
-.spaced { margin-top: 3.5rem; }
-
 .list { list-style: none; margin: 0.5rem 0; }
-.list li { padding: 0.2rem 0; color: var(--muted); }
-.list li::before { content: "→ "; color: var(--accent); }
-.small { font-size: 0.85rem; margin-top: 0.75rem; }
+/* the arrow hangs in the gutter so long, wrapped lines stay aligned */
+.list li { position: relative; padding: 0.2rem 0 0.2rem 1.4em; color: var(--muted); }
+.list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
 
 .contact { text-align: center; }
 .contact p { color: var(--muted); }
@@ -347,3 +343,379 @@ footer {
   .nav nav { display: none; }
   .timeline li { flex-direction: column; gap: 0.25rem; }
 }
+
+
+/* =========================================================
+   === LAYOUT: EDITORIAL ===
+   The site's layout, switched on by data-layout="editorial" on <html>.
+   Magazine feel: a masthead bar, a large serif name with an italic deck,
+   a ruled stats strip, numbered section headers and asymmetric
+   two-column spreads separated by hairline rules. One column at 960px
+   and below. Uses the extra Fraunces <link> in index.html.
+   ========================================================= */
+html[data-layout="editorial"] {
+  --ed-max: 1180px;
+  --ed-pad: clamp(1.25rem, 4vw, 2.5rem);
+  --ed-gap: clamp(2rem, 4vw, 3.5rem);
+  scroll-padding-top: 5rem;
+}
+html[data-layout="editorial"] body { counter-reset: ed-section; }
+
+/* masthead */
+html[data-layout="editorial"] .nav {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom-color: var(--text);
+}
+html[data-layout="editorial"] .logo {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+html[data-layout="editorial"] .nav nav { gap: 1.5rem; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+html[data-layout="editorial"] .nav nav::-webkit-scrollbar { display: none; }
+html[data-layout="editorial"] .nav nav a {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* page */
+html[data-layout="editorial"] main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--ed-gap);
+  max-width: var(--ed-max);
+  margin: 0 auto;
+  padding: 0 var(--ed-pad);
+}
+html[data-layout="editorial"] .section {
+  position: relative;
+  max-width: none;
+  margin: 0;
+  padding: 1.75rem 0 2.25rem;
+  border-top: 1px solid var(--border);
+}
+html[data-layout="editorial"] .section > h2 {
+  margin-bottom: 1.1rem;
+  font-size: clamp(1.45rem, 2vw, 1.75rem);
+  letter-spacing: -0.01em;
+}
+html[data-layout="editorial"] .section > h2::before {   /* 01, 02, ... */
+  counter-increment: ed-section;
+  content: counter(ed-section, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.55rem;
+  font: 600 0.7rem/1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+html[data-layout="editorial"] .lead { font-size: 1rem; line-height: 1.7; margin-bottom: 0.85rem; }
+html[data-layout="editorial"] .contact { text-align: left; }
+html[data-layout="editorial"] #next .lead {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* hero */
+html[data-layout="editorial"] .hero {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "kicker kicker"
+    "title  photo"
+    "deck   photo"
+    "email  email"
+    "stats  stats"
+    "cta    cta";
+  align-items: end;
+  justify-items: start;
+  column-gap: 1.75rem;
+  text-align: left;
+  padding: 2.25rem 0 2rem;
+}
+html[data-layout="editorial"] .hero .eyebrow {
+  grid-area: kicker;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+html[data-layout="editorial"] .hero .eyebrow::after { content: ""; flex: 1; border-top: 1px solid var(--border); }
+html[data-layout="editorial"] .hero h1 {
+  grid-area: title;
+  margin: 1rem 0 0.85rem;
+  font-size: clamp(2.75rem, 5.6vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+html[data-layout="editorial"] .tagline {
+  grid-area: deck;
+  max-width: 36ch;
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.45;
+}
+html[data-layout="editorial"] .contact-email { grid-area: email; margin-top: 0.75rem; font-size: 0.9rem; color: var(--muted); }
+html[data-layout="editorial"] .contact-email:empty { display: none; }
+html[data-layout="editorial"] .contact-email a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+html[data-layout="editorial"] .hero-photo {
+  grid-area: photo;
+  align-self: center;
+  width: clamp(76px, 10vw, 136px);
+  margin: 0;
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--border);
+}
+html[data-layout="editorial"] .stats {
+  grid-area: stats;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 1.75rem 0 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+html[data-layout="editorial"] .stats div {
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  background: none;
+  border: 0;
+  border-left: 1px solid var(--border);
+  border-radius: 0;
+}
+html[data-layout="editorial"] .stats div:first-child { border-left: 0; padding-left: 0; }
+html[data-layout="editorial"] .stats strong {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+html[data-layout="editorial"] .stats span { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+html[data-layout="editorial"] .hero .button {
+  grid-area: cta;
+  padding: 0 0 0.15rem;
+  border-radius: 0;
+  border-bottom: 1px solid var(--accent);
+  background: none;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+html[data-layout="editorial"] .hero .button:hover { transform: none; color: var(--accent); }
+
+/* experience as a ruled list */
+html[data-layout="editorial"] .timeline { border-left: 0; }
+html[data-layout="editorial"] .timeline li {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  gap: 0 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--border);
+}
+html[data-layout="editorial"] .timeline li:first-child { border-top: 0; padding-top: 0; }
+html[data-layout="editorial"] .timeline li::before { display: none; }
+html[data-layout="editorial"] .timeline .year {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}
+html[data-layout="editorial"] .timeline h3 { font-family: "Fraunces", Georgia, serif; font-size: 1.1rem; font-weight: 600; }
+html[data-layout="editorial"] .timeline .sub { font-size: 0.82rem; color: var(--muted); }
+html[data-layout="editorial"] .timeline p { font-size: 0.92rem; }
+
+/* cards become ruled list items */
+html[data-layout="editorial"] .grid { grid-template-columns: minmax(0, 1fr); gap: 0 2rem; }
+html[data-layout="editorial"] .card {
+  padding: 0.9rem 0 1rem;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+}
+html[data-layout="editorial"] .card:hover { transform: none; }
+html[data-layout="editorial"] .card h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+html[data-layout="editorial"] .card:hover h3 { color: var(--accent); }
+html[data-layout="editorial"] .card .sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; }
+html[data-layout="editorial"] .card p,
+html[data-layout="editorial"] .list li { font-size: 0.9rem; }
+html[data-layout="editorial"] .tag {
+  padding: 0;
+  margin-bottom: 0.35rem;
+  background: none;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+html[data-layout="editorial"] :is(#leadership, #likes) .card {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  align-content: start;
+}
+html[data-layout="editorial"] :is(#leadership, #likes) .card > * { grid-column: 2; }
+/* line icon in the gutter, centered on the title's first line (no tile) */
+html[data-layout="editorial"] :is(#leadership, #likes) .card > .card-icon {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  width: 1.5rem;
+  height: 1.73rem;               /* = one line of the 1.08rem card title */
+  margin: 0;
+  place-items: center start;
+  border-radius: 0;
+  background: none;
+}
+html[data-layout="editorial"] :is(#leadership, #likes) .card > .card-icon .icon { width: 1.15rem; height: 1.15rem; }
+
+/* skills as label | inline list rows */
+html[data-layout="editorial"] .skill-group {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  margin: 0;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--border);
+}
+html[data-layout="editorial"] .skill-group h3 {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+html[data-layout="editorial"] .chips { gap: 0.2rem 0.5rem; }
+html[data-layout="editorial"] .chip {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 0.92rem;
+}
+html[data-layout="editorial"] .chip:not(:last-child)::after { content: "/"; margin-left: 0.5rem; color: var(--muted); }
+/* Coursework group: the course list fills the value column like the chips */
+html[data-layout="editorial"] .skill-group .list { margin: 0; }
+html[data-layout="editorial"] .skill-group .list li { padding-block: 0 0.3rem; }
+html[data-layout="editorial"] .skill-group .list li:last-child { padding-bottom: 0; }
+
+html[data-layout="editorial"] footer {
+  width: min(100% - 2 * var(--ed-pad), var(--ed-max) - 2 * var(--ed-pad));
+  margin: 0 auto;
+  padding: 1.25rem 0 2rem;
+  border-top-color: var(--text);
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 641px) {
+  html[data-layout="editorial"] :is(#leadership, #projects, #likes) .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* desktop: asymmetric two-column spreads */
+@media (min-width: 961px) {
+  html[data-layout="editorial"] main { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  html[data-layout="editorial"] .section { grid-column: 1 / -1; }
+  html[data-layout="editorial"] .hero { grid-column: 1 / span 7; }
+  html[data-layout="editorial"] #about { grid-column: 8 / -1; padding-top: 2.25rem; border-top: 0; }
+  html[data-layout="editorial"] #experience { grid-column: 1 / span 5; }
+  html[data-layout="editorial"] #leadership { grid-column: 6 / -1; }
+  html[data-layout="editorial"] #projects .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html[data-layout="editorial"] #skills { grid-column: 1 / span 7; grid-row: span 2; }
+  html[data-layout="editorial"] #likes,
+  html[data-layout="editorial"] #next { grid-column: 8 / -1; }
+  /* hairline column rule on the left of each right-hand block */
+  html[data-layout="editorial"] :is(#about, #leadership, #likes, #next)::after {
+    content: "";
+    position: absolute;
+    top: 1.75rem;
+    bottom: 2rem;
+    left: calc(var(--ed-gap) / -2);
+    border-left: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 640px) {
+  html[data-layout="editorial"] { scroll-padding-top: 6.5rem; }
+  html[data-layout="editorial"] .nav { flex-wrap: wrap; row-gap: 0.3rem; padding-bottom: 0.55rem; }
+  html[data-layout="editorial"] .nav nav { display: flex; order: 3; flex: 1 0 100%; gap: 1.25rem; }
+  html[data-layout="editorial"] .hero { padding-top: 1.75rem; }
+  html[data-layout="editorial"] .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[data-layout="editorial"] .stats div:nth-child(3) { border-left: 0; padding-left: 0; }
+  html[data-layout="editorial"] .stats div:nth-child(n + 3) { border-top: 1px solid var(--border); }
+  html[data-layout="editorial"] .skill-group { grid-template-columns: minmax(0, 1fr); }
+}
+/* === END LAYOUT: EDITORIAL === */
+
+
+/* === ICONS (Lucide, ISC) ===
+   Inline SVG line icons from Lucide (https://lucide.dev), lucide-static v1.67.0.
+   ISC License, Copyright (c) Lucide Icons and Contributors.
+   Every icon uses stroke="currentColor", so it takes the theme colors from
+   the variables above and switches with light/dark mode automatically. */
+
+/* Base: icons scale with the surrounding text */
+.icon {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  vertical-align: -0.25em;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Card header icon: accent-blue line icon on
+   a soft accent tile, matching the .tag pills. Contrast is 3.9:1 in light mode and 5.1:1 in dark mode. */
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.card-icon .icon { width: 1.25rem; height: 1.25rem; }
+
+/* Theme toggle: the sun shows in dark mode (the default) and the moon in light mode */
+#theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  color: var(--text);
+  transition: color 0.2s, border-color 0.2s;
+}
+#theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+#theme-toggle .icon { width: 1.125rem; height: 1.125rem; }
+#theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] #theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] #theme-toggle .icon-moon { display: inline-block; }
+
+/* Hero button arrow (optional item 13) */
+.button .icon { width: 1em; height: 1em; vertical-align: -0.125em; }
+/* === END ICONS === */
